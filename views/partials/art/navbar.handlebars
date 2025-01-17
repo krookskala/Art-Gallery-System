@@ -1,0 +1,405 @@
+<div class="uk-navbar-toggle-icon" class="nav">
+  <nav class="uk-navbar uk-navbar-container" uk-navbar="mode: click">
+    <!-- Logo Container -->
+    <div class="uk-navbar-left">
+      <a href="/" class="uk-navbar-item uk-logo">
+        <img src="/images/logo3.png" alt="Krookskala Gallery Logo">
+      </a>
+    </div>
+
+    <div id="navi" class="uk-navbar-right">
+      <ul class="uk-navbar-nav">
+        <li><a class="nav" href="/">HOME</a></li>
+        <li>
+          <a href="#">COLLECTION</a>
+          <div class="uk-navbar-dropdown">
+            <ul class="uk-nav uk-navbar-dropdown-nav">
+              {{#each navStyles.Style}}
+              <li>
+                <a href="/collection/{{this.dataValues.style_name}}" class="collection">
+                  {{this.dataValues.style_name}}
+                </a>
+              </li>
+              {{/each}}
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="#">ARTISTS</a>
+          <div class="uk-navbar-dropdown">
+            <ul class="uk-nav uk-navbar-dropdown-nav">
+              {{#if navArtists.Artist}}
+              {{#each navArtists.Artist}}
+              <li>
+                <a href="/artist/{{this.dataValues.artist_name}}" class="artist">
+                  {{this.dataValues.artist_name}}
+                </a>
+              </li>
+              {{/each}}
+              {{else}}
+              <li>
+                <a href="#" class="artist">No Artists Available</a>
+              </li>
+              {{/if}}
+            </ul>
+          </div>
+        </li>
+        <li><a href="/exhibitions">EXHIBITIONS</a></li>
+        <li><a href="/about">ABOUT</a></li>
+        
+        <!-- Dashboard Link (only if user is logged in) -->
+        {{#if user}}
+        <li>
+          <a href="{{#ifCond user.role '===' 'admin'}}/manager{{else}}/user{{/ifCond}}">
+            Dashboard
+          </a>
+        </li>
+        {{/if}}
+        
+        <!-- Login/Profile Button -->
+        <li>
+            {{#if user}}
+                <a href="#" class="nav" uk-toggle="target: #offcanvas-reveal-profile">
+                    <span uk-icon="user"></span> {{user.email}}
+                </a>
+            {{else}}
+                <a href="#" class="nav" uk-toggle="target: #offcanvas-reveal-login">
+                    LOGIN
+                </a>
+            {{/if}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="uk-navbar-nav" id="sidenav" uk-offcanvas="flip:true" class="uk-offcanvas">
+      <div class="uk-offcanvas-bar">
+        <ul class="uk-list" id="sidenavlist">
+          <li><a class="nav" href="/">Home</a></li>
+          <li>
+            <a href="#" uk-toggle="target: #offcanvas-reveal-collection">Collection</a>
+          </li>
+          <li>
+            <a href="#" uk-toggle="target: #offcanvas-reveal-artist">Artists</a>
+          </li>
+          <li><a href="/exhibitions">Exhibitions</a></li>
+          <li><a href="/about">About</a></li>
+          <!-- Dashboard Link (sidebar) -->
+          {{#if user}}
+          <li>
+            <a href="{{#ifCond user.role '===' 'admin'}}/manager{{else}}/user{{/ifCond}}">
+              Dashboard
+            </a>
+          </li>
+          {{/if}}
+
+          <button class="uk-button uk-button-text login-header" type="button"
+            uk-toggle="target: #offcanvas-reveal">
+            Login
+          </button>
+        </ul>
+      </div>
+    </div>
+
+    <div class="uk-navbar-right">
+      <a id="sidebartoggle" class="uk-navbar-toggle uk-navbar-right" 
+         uk-toggle="target: #sidenav" uk-navbar-toggle-icon href="#">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Offcanvas for ARTISTS -->
+  <div id="offcanvas-reveal-artist" uk-offcanvas="mode: reveal; overlay: true; flip:true">
+    <div class="uk-offcanvas-bar">
+      <button class="uk-offcanvas-close" type="button" uk-close></button>
+      <div class="form uk-child-width-1-2 uk-child-width-1-4@s uk-grid-match" uk-grid>
+        <ul class="uk-nav uk-navbar-dropdown-nav">
+          {{#each navArtists.Artist}}
+          <li>
+            <a class="artist" data-name="{{this.dataValues.artist_name}}">
+              {{this.dataValues.artist_name}}
+            </a>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offcanvas for COLLECTION -->
+  <div id="offcanvas-reveal-collection" uk-offcanvas="mode: reveal; overlay: true; flip:true">
+    <div class="uk-offcanvas-bar">
+      <button class="uk-offcanvas-close" type="button" uk-close></button>
+      <div class="form uk-child-width-1-2 uk-child-width-1-4@s uk-grid-match" uk-grid>
+        <ul class="uk-nav uk-navbar-dropdown-nav">
+          {{#each navStyles.Style}}
+          <li>
+            <a class="collection" data-target="{{this.dataValues.style_name}}">
+              {{this.dataValues.style_name}}
+            </a>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="offcanvas-reveal-login" uk-offcanvas="mode: reveal; overlay: true; flip: true">
+    <div class="uk-offcanvas-bar dark-modal">
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        
+        <div class="uk-margin-auto-vertical uk-width-1-1 auth-container">
+            <h3 class="uk-text-center auth-title">Login</h3>
+            
+            <form class="login uk-form-stacked">
+                <div class="uk-margin">
+                    <input class="uk-input dark-input" type="email" id="login-email-verify" placeholder="Email">
+                </div>
+
+                <div class="uk-margin">
+                    <input class="uk-input dark-input" type="password" id="login-password-verify" placeholder="Password">
+                </div>
+
+                <div class="uk-margin">
+                    <button type="submit" class="uk-button uk-button-default uk-width-1-1 auth-submit-btn">
+                        LOGIN
+                    </button>
+                </div>
+
+                <div class="uk-text-center auth-alternate">
+                    <p class="divider-text">or</p>
+                    <a href="#" class="switch-to-signup auth-link">
+                        Sign Up Here
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div id="offcanvas-reveal-signup" uk-offcanvas="mode: reveal; overlay: true; flip: true">
+    <div class="uk-offcanvas-bar dark-modal">
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        
+        <div class="uk-margin-auto-vertical uk-width-1-1 auth-container">
+            <h3 class="uk-text-center auth-title">Sign Up</h3>
+            
+            <form class="signup uk-form-stacked">
+                <div id="signup-alert" class="uk-margin"></div>
+                <div class="uk-margin">
+                    <input class="uk-input dark-input" type="email" id="email-input" placeholder="Email">
+                </div>
+
+                <div class="uk-margin">
+                    <input class="uk-input dark-input" type="password" id="password-input" placeholder="Password">
+                </div>
+
+                <div class="uk-margin">
+                    <button type="submit" class="uk-button uk-button-default uk-width-1-1 auth-submit-btn">
+                        SIGN UP
+                    </button>
+                </div>
+
+                <div class="uk-text-center auth-alternate">
+                    <p class="divider-text">or</p>
+                    <a href="#" class="switch-to-login auth-link">
+                        Login Here
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div id="offcanvas-reveal-profile" uk-offcanvas="mode: reveal; overlay: true; flip: true">
+    <div class="uk-offcanvas-bar profile-modal">
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        
+        <!-- Profile Header -->
+        <div class="profile-header uk-text-center">
+            <div class="profile-avatar">
+                <span uk-icon="icon: user; ratio: 3.5"></span>
+            </div>
+            <h3 class="profile-email">{{user.email}}</h3>
+            <p class="profile-role">{{user.role}}</p>
+        </div>
+
+        <!-- Profile Actions -->
+        <div class="profile-actions">
+            <!-- Email Update Button -->
+            <button class="profile-button" onclick="toggleForm('email-form')">
+                <span uk-icon="mail"></span>
+                UPDATE EMAIL
+            </button>
+
+            <!-- Password Update Button -->
+            <button class="profile-button" onclick="toggleForm('password-form')">
+                <span uk-icon="lock"></span>
+                CHANGE PASSWORD
+            </button>
+        </div>
+
+        <!-- Email Update Form -->
+        <div id="email-form" class="profile-form" hidden>
+            <h4 class="uk-text-center">Update Email</h4>
+            <input type="email" class="profile-input uk-text-center" id="new-email" placeholder="New Email">
+            <div class="form-buttons">
+                <button class="cancel-button" onclick="clearAndHideForm('email-form', ['new-email'])">Cancel</button>
+                <button class="submit-button" id="change-email-btn">Update</button>
+            </div>
+        </div>
+
+        <!-- Password Update Form -->
+        <div id="password-form" class="profile-form" hidden>
+            <h4 class="uk-text-center">Change Password</h4>
+            <input type="password" class="profile-input uk-text-center" id="current-password" placeholder="Current Password">
+            <input type="password" class="profile-input uk-text-center" id="new-password" placeholder="New Password">
+            <div class="form-buttons">
+                <button class="cancel-button" onclick="clearAndHideForm('password-form', ['current-password', 'new-password'])">Cancel</button>
+                <button class="submit-button" id="change-password-btn">Update</button>
+            </div>
+        </div>
+
+        <!-- Logout Button -->
+        <button id="logout-btn" class="logout-button">
+            <span uk-icon="sign-out"></span>
+            LOGOUT
+        </button>
+    </div>
+  </div>
+</div>
+
+<script>
+function hideAllForms() {
+    document.getElementById('email-form').hidden = true;
+    document.getElementById('password-form').hidden = true;
+}
+
+function clearInputs(inputIds) {
+    inputIds.forEach(id => {
+        document.getElementById(id).value = '';
+    });
+}
+
+function clearAndHideForm(formId, inputIds) {
+    clearInputs(inputIds);
+    document.getElementById(formId).hidden = true;
+}
+
+function toggleForm(formId) {
+    // Hide all forms and clear inputs first
+    clearInputs(['new-email', 'current-password', 'new-password']);
+    hideAllForms();
+    
+    // Then show selected form
+    document.getElementById(formId).hidden = false;
+}
+
+// Hide all forms on page load
+document.addEventListener('DOMContentLoaded', hideAllForms);
+
+// Update submit handlers in Profile.js
+$(document).ready(function() {
+    // Email Update
+    $("#change-email-btn").on("click", function() {
+        const newEmail = $("#new-email").val().trim();
+        
+        if (!newEmail) {
+            UIkit.notification({
+                message: 'Please enter your new email address',
+                status: 'warning'
+            });
+            return;
+        }
+
+        $.ajax({
+            url: "/api/user/email",
+            method: "PUT",
+            data: { email: newEmail }
+        })
+        .then((response) => {
+            UIkit.notification({
+                message: response.message,
+                status: 'success'
+            });
+            // Clear and hide form
+            clearAndHideForm('email-form', ['new-email']);
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        })
+        .fail(err => {
+            UIkit.notification({
+                message: err.responseJSON?.message || 'Email update failed',
+                status: 'danger'
+            });
+        });
+    });
+
+    // Password Update
+    $("#change-password-btn").on("click", function() {
+        const currentPassword = $("#current-password").val().trim();
+        const newPassword = $("#new-password").val().trim();
+        
+        if (!currentPassword || !newPassword) {
+            UIkit.notification({
+                message: 'Please fill in all password fields',
+                status: 'warning'
+            });
+            return;
+        }
+
+        $.ajax({
+            url: "/api/user/password",
+            method: "PUT",
+            data: { 
+                currentPassword: currentPassword,
+                newPassword: newPassword
+            }
+        })
+        .then((response) => {
+            UIkit.notification({
+                message: response.message,
+                status: 'success'
+            });
+            // Clear and hide form
+            clearAndHideForm('password-form', ['current-password', 'new-password']);
+        })
+        .fail(err => {
+            UIkit.notification({
+                message: err.responseJSON?.message || 'Password update failed',
+                status: 'danger'
+            });
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Check user login status
+    const isLoggedIn = {{#if user}}true{{else}}false{{/if}};
+    const currentPath = window.location.pathname;
+    
+    // Find login menu item
+    const loginMenuItem = document.querySelector('.login-menu-item');
+    
+    if (isLoggedIn) {
+        // Hide login menu if user is logged in
+        if (loginMenuItem) {
+            loginMenuItem.style.display = 'none';
+        }
+    }
+    
+    // Mark active menu item
+    const menuItems = document.querySelectorAll('.uk-navbar-nav li');
+    menuItems.forEach(item => {
+        const link = item.querySelector('a');
+        if (link && link.getAttribute('href') === currentPath) {
+            item.classList.add('uk-active');
+        } else {
+            item.classList.remove('uk-active');
+        }
+    });
+});
+</script>

@@ -1,0 +1,21 @@
+{{#if pagination}}
+{{#if pagination.hasPrevPage}}
+<li>
+    <a href="?page={{pagination.prevPage}}" class="uk-pagination-previous">
+        <span uk-pagination-previous></span> Previous
+    </a>
+</li>
+{{/if}}
+{{#each pagination.pages}}
+<li class="{{#if isCurrentPage}}uk-active{{/if}}">
+    <a href="?page={{pageNumber}}">{{pageNumber}}</a>
+</li>
+{{/each}}
+{{#if pagination.hasNextPage}}
+<li>
+    <a href="?page={{pagination.nextPage}}" class="uk-pagination-next">
+        Next <span uk-pagination-next></span>
+    </a>
+</li>
+{{/if}}
+{{/if}}

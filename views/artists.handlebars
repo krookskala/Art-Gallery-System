@@ -1,0 +1,45 @@
+{{#with artistHeader}}
+<div class="artist-header">
+    <h1>{{artist_name}}</h1>
+    {{#if artist_bio}}
+    <p>{{artist_bio}}</p>
+    {{/if}}
+</div>
+{{/with}}
+
+<div class="uk-container uk-margin-large-top">
+    <div class="uk-grid uk-child-width-1-3@m uk-flex-center" uk-grid>
+        {{#each artistArtwork.Artwork}}
+        <div>
+            <div class="uk-card uk-card-default">
+                <div class="uk-card-media-top uk-text-center">
+                    <img src="{{this.dataValues.artwork_image}}" alt="{{this.dataValues.artwork_name}}" class="uk-width-1-1" style="object-fit: cover; height: 300px;">
+                </div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">{{this.dataValues.artwork_name}}</h3>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Description:</strong>
+                        <p class="detail-value">{{this.dataValues.artwork_descript}}</p>
+                    </div>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Size:</strong>
+                        <span class="detail-value">{{this.dataValues.artwork_size}}</span>
+                    </div>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Medium:</strong>
+                        <span class="detail-value">{{this.dataValues.artwork_medium}}</span>
+                    </div>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Color Tone:</strong>
+                        <span class="detail-value">{{this.dataValues.artwork_colortone}}</span>
+                    </div>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Price:</strong>
+                        <span class="price-value">${{this.dataValues.artwork_price}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

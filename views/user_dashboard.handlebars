@@ -1,0 +1,62 @@
+<div class="uk-container uk-margin-large">
+    <!-- User Information -->
+    <div class="uk-card uk-card-default uk-card-body uk-margin-medium-bottom uk-width-1-1">
+        <div class="uk-flex uk-flex-middle">
+            <div class="uk-margin-right">
+                <span class="uk-icon-button uk-icon-button-large" uk-icon="icon: user; ratio: 1.2"></span>
+            </div>
+            <div>
+                <h2 class="uk-card-title uk-margin-remove">Welcome, {{user.email}}</h2>
+                <p class="uk-text-meta uk-margin-remove-top uk-margin-small-bottom">{{user.role}}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorites -->
+    <div class="uk-card uk-card-default uk-card-hover uk-margin-medium-bottom uk-width-1-1">
+        <div class="uk-card-header">
+            <h3 class="uk-card-title">
+                <span class="uk-margin-small-right" uk-icon="icon: heart; ratio: 1.2"></span>
+                Your Favorites
+            </h3>
+        </div>
+        <div class="uk-card-body">
+            <ul id="favorites-list" class="uk-list uk-list-large uk-list-divider">
+                {{#each userFavorites}}
+                <li class="uk-flex uk-flex-middle">
+                    <span class="uk-margin-small-right" uk-icon="paint-bucket"></span>
+                    <span class="uk-text-large">{{this.style_name}}</span>
+                </li>
+                {{else}}
+                <li class="uk-text-muted uk-text-medium">No favorites added yet</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Saved Exhibitions -->
+    <div class="uk-card uk-card-default uk-card-hover uk-margin-medium-bottom uk-width-1-1">
+        <div class="uk-card-header">
+            <h3 class="uk-card-title">
+                <span class="uk-margin-small-right" uk-icon="icon: bookmark; ratio: 1.2"></span>
+                Saved Exhibitions
+            </h3>
+        </div>
+        <div class="uk-card-body">
+            <ul id="bookmarks-list" class="uk-list uk-list-large uk-list-divider">
+                {{#each userBookmarks}}
+                <li class="uk-margin-medium-bottom">
+                    <h3 class="uk-margin-small-bottom uk-text-bold">{{this.Exhibit.exhibit_name}}</h3>
+                    <div class="uk-text-meta uk-margin-small-bottom">
+                        <span uk-icon="calendar"></span>
+                        <span class="uk-text-medium">{{this.Exhibit.date}} - {{this.Exhibit.time}}</span>
+                    </div>
+                    <p class="uk-text-medium uk-margin-small-top">{{this.Exhibit.exhibit_descript}}</p>
+                </li>
+                {{else}}
+                <li class="uk-text-muted uk-text-medium">No exhibitions saved yet</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+{{#with styleHeader}}
+<div class="style-header">
+    <h1>{{style_name}}</h1>
+    {{#if style_description}}
+    <p>{{style_description}}</p>
+    {{/if}}
+    {{#if ../user}}
+    <button class="uk-button uk-button-primary favorite-button" data-style="{{style_name}}">
+        <span class="favorite-text">Add to Favorites</span>
+    </button>
+    {{/if}}
+</div>
+{{/with}}
+
+<div class="uk-container uk-margin-large-top">
+    <div class="uk-grid uk-child-width-1-3@m uk-flex-center" uk-grid>
+        {{#each collArtwork.Artwork}}
+        <div>
+            <div class="uk-card uk-card-default">
+                <div class="uk-card-media-top uk-text-center">
+                    <img src="{{this.dataValues.artwork_image}}" 
+                         alt="{{this.dataValues.artwork_name}}"
+                         class="uk-width-1-1"
+                         style="object-fit: cover; height: 300px;">
+                </div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title artwork-name">{{this.dataValues.artwork_name}}</h3>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Description:</strong>
+                        <p class="detail-value">{{this.dataValues.artwork_descript}}</p>
+                    </div>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Size:</strong>
+                        <span class="detail-value">{{this.dataValues.artwork_size}}</span>
+                    </div>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Medium:</strong>
+                        <span class="detail-value">{{this.dataValues.artwork_medium}}</span>
+                    </div>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Color Tone:</strong>
+                        <span class="detail-value">{{this.dataValues.artwork_colortone}}</span>
+                    </div>
+                    <div class="uk-margin">
+                        <strong class="detail-label">Price:</strong>
+                        <span class="price-value">${{this.dataValues.artwork_price}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<div class="uk-margin-large-top">
+    <div class="uk-grid-small uk-child-width-auto uk-flex-center" uk-grid>
+        <div>
+            <div class="uk-text-meta">
+                Showing {{pagination.startCount}} to {{pagination.endCount}} of {{pagination.totalItems}} artworks
+            </div>
+        </div>
+    </div>
+    <ul class="uk-pagination uk-flex-center uk-margin-medium-top">
+        {{#if pagination.hasPrevPage}}
+        <li><a href="?page={{pagination.prevPage}}&size={{size}}"><span uk-pagination-previous></span></a></li>
+        {{/if}}
+        {{#each pagination.pages}}
+        <li class="{{#if isCurrentPage}}uk-active{{/if}}">
+            <a href="?page={{pageNumber}}">{{pageNumber}}</a>
+        </li>
+        {{/each}}
+        {{#if pagination.hasNextPage}}
+        <li><a href="?page={{pagination.nextPage}}&size={{size}}"><span uk-pagination-next></span></a></li>
+        {{/if}}
+    </ul>
+</div>
