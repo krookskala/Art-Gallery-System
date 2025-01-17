@@ -1,0 +1,9 @@
+npm install
+npm init -y
+npm install express dotenv express-session passport passport-local
+npm install express-handlebars
+npm install sequelize sqlite3
+npm install express-session
+npm install connect-session-sequelize
+npx sequelize-cli db:seed:all
+npx sequelize-cli db:seed:undo:all
