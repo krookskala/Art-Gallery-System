@@ -3,17 +3,17 @@
 
 The Krookskala Art Gallery System is an interactive web application designed to enhance the way users interact with art galleries. It provides a seamless platform for browsing and managing artworks, artists, and exhibitions. Whether you're an art enthusiast exploring collections or an administrator managing gallery data, this system offers a robust and user-friendly experience.
 
-![Image](https://github.com/user-attachments/assets/81a1c8c9-2cf4-42ba-b0e1-245271f6f87c)
+![Image](https://github.com/user-attachments/assets/d6232ff6-f407-4f22-a7e3-2d343534a63c)
 
-![Image](https://github.com/user-attachments/assets/10bef6ac-1c97-4304-bf1e-18ff41516a87)
+![Image](https://github.com/user-attachments/assets/1bd04fb0-e85f-4468-bf5c-373b2d1556da)
 
-![Image](https://github.com/user-attachments/assets/01a72f37-f825-46bd-9abf-4b417d38bd76)
+![Image](https://github.com/user-attachments/assets/9e85d2b2-b38a-4cf9-a69a-992b2f42bed0)
 
-![Image](https://github.com/user-attachments/assets/6963c8c2-32cd-4e64-8c2d-82bd9a64a193)
+![Image](https://github.com/user-attachments/assets/fb63ba6c-35bd-48a3-ba73-50be52a86b1b)
 
-![Image](https://github.com/user-attachments/assets/edc9bf87-79ad-4b39-bdec-1a5563886ba1)
+![Image](https://github.com/user-attachments/assets/6cc2987d-cdbf-4b50-9471-eee2173582ff)
 
-![Image](https://github.com/user-attachments/assets/00d86435-16a0-4631-a55b-183cbd43575c)
+![Image](https://github.com/user-attachments/assets/4b9cce4b-d376-4296-b680-acca320ec4da)
 
 
 ## Table Of Contents
